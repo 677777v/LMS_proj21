@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    <h1>Детали бага {{ object.id }}</h1>
+    <p><a href="{% url 'quality_control:update_bug' object.id %}">Изменить отчет об ошибке</a></p>
+    <p><a href="{% url 'quality_control:delete_bug' object.id %}" onclick="return confirm('Вы уверены, что хотите удалить этот отчет об ошибке?');">Удалить отчет об ошибке</a></p>
+    <h2>Информация о баге</h2>
+    <h3>Название</h3><p>{{ object.title }}</p>
+    <h3>Описание</h3><p>{{ object.description }}</p>
+    <h3>Статус</h3><p>{{ object.status }}</p>
+    <h3>Приоритет</h3><p>{{ object.priority }}</p></br>
+    <h2>Информация о связанном проекте</h2>
+    <h3>Название проекта</h3><p>{{ object.project.name }}</p>
+    <h3>Описание проекта</h3><p>{{ object.project.description }}</p></br>
+    <h2>Информация о связанной задаче</h2>
+    {% if object.task is not None %}
+        <h3>Название задачи</h3><p>{{ object.task.name }}</p>
+        <h3>Описание задачи</h3><p>{{ object.task.description }}</p></br>
+    {% else %}
+        <p>Нет связанной задачи</p>
+    {% endif %}
+{% endblock %}
+
+
